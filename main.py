@@ -12,9 +12,12 @@ class Window(QMainWindow):
         super().__init__()
         uic.loadUi('./Views/main.ui', self)
         self.label_alert.hide()
+        self.label_file_sucessful.hide()
         self.button_selectFile.clicked.connect(self.openFileNameDialog)
         self.button_import.clicked.connect(self.isClickedImportButton)
+        self.button_ok.setEnabled(False)
         self.button_ok.clicked.connect(self.isClickedButtonOK)
+        self.button_exit.clicked.connect(self.close)
 
     def openFileNameDialog(self):    
         options = QFileDialog.Options()
@@ -34,12 +37,15 @@ class Window(QMainWindow):
             self.label_alert.show()
         else:
            selected_automaton.read_text_file(text_file)
+           self.label_file_sucessful.show()
+           self.button_ok.setEnabled(True)
         
     def isClickedButtonOK(self):
         global selected_automaton
         text = self.textField_text.text()
         text = text.lower()
-        input_text = list(text)
+        input_text = list(text)            
+            
         if(selected_automaton.automaton_function(input_text)):
             self.label_status.setText('ACCEPT')
         else:

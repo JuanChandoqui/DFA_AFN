@@ -1,12 +1,11 @@
-class ReadTextFile():
-    def __init__(self, file):
-        self.file = file
+class ReadTextFile2():
 
     def read_text_file(self):
-        f = open(self.file, 'r', encoding='utf-8')
-        lines = f.readlines()
-        return lines
-                
+        f = open('./DFA.txt', 'r', encoding='utf-8')
+        values = f.readlines()
+        print(values)
+        return values       
+           
     def get_values_from_text_file(self):
         content_text_file = self.read_text_file()
         value_list = []
@@ -121,14 +120,18 @@ class ReadTextFile():
                             # print('CONCAT STRING: ', concat_string)                        
                         j+=1
                         if(j < len(transitions) and (transitions[j] == ',' or transitions[j] == '}')):
+                            # print('COMA ENCONTRADA: ', transitions[j])
+                            # print('CONCAT STRING FINAL: ', concat_string)
                             aux_list.append(concat_string)
                             concat_string = ''
                         if(j < len(transitions) and transitions[j] == ')'):
+                            # print('FINALIZA AQUI CON )')
                             final_transition = True
 
-                    if(final_transition and len(aux_list) >= 3):
-                        concatenate_tuples = tuple(aux_list)
-                        list_transitions.append(concatenate_tuples)           
+                    if(final_transition):
+                        if(len(aux_list) >= 3):
+                            concatenate_tuples = tuple(aux_list)
+                            list_transitions.append(concatenate_tuples)           
                     i = j                     
                 i+=1
         
@@ -143,3 +146,7 @@ class ReadTextFile():
             notation_dict = {'S': set_alphabet, 'Q': set_states, 'q0': set_initial_states, 'F': set_final_states, 'D': tf}
 
         return notation_dict
+
+
+d = ReadTextFile2()
+d.get_values_from_text_file()

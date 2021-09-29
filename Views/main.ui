@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>612</width>
-    <height>509</height>
+    <height>527</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -46,7 +46,7 @@ color: rgb(0, 0, 0);
     <property name="geometry">
      <rect>
       <x>270</x>
-      <y>430</y>
+      <y>410</y>
       <width>101</width>
       <height>28</height>
      </rect>
@@ -63,7 +63,7 @@ color: rgb(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>250</x>
-      <y>340</y>
+      <y>320</y>
       <width>151</width>
       <height>31</height>
      </rect>
@@ -145,7 +145,7 @@ color: rgb(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>160</x>
-      <y>290</y>
+      <y>270</y>
       <width>341</width>
       <height>31</height>
      </rect>
@@ -200,7 +200,7 @@ color: rgb(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>260</x>
-      <y>390</y>
+      <y>370</y>
       <width>131</width>
       <height>21</height>
      </rect>
@@ -218,6 +218,42 @@ font: 10pt &quot;MS Shell Dlg 2&quot;;</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_file_sucessful">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>200</y>
+      <width>101</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(0, 170, 0);</string>
+    </property>
+    <property name="text">
+     <string>File Sucessful!</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="button_exit">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>470</y>
+      <width>111</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 0, 0);
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>EXIT</string>
     </property>
    </widget>
   </widget>
