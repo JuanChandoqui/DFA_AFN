@@ -13,6 +13,7 @@ class ReadTextFile():
         list_transitions = []
         aux_list = []
         isDFA = True
+        initial_pair_keys = False
 
         alphabet = ''
         states = ''
@@ -22,7 +23,7 @@ class ReadTextFile():
 
         set_alphabet = set()
         set_states = set()
-        set_initial_states = set() #<--- only for AFN
+        list_initial_states = list() #<--- only for AFN
         set_final_states = set()
         tf = dict() #<---- table of transitions
         
@@ -70,6 +71,7 @@ class ReadTextFile():
         
          #----- get initial states (If is a AFN) ---------------------------------
         if(initial_state[0].startswith('{')):
+            initial_pair_keys = True
             while(initial_state[i].endswith('}') != True):
                 j = i
                 while(initial_state[j] != ',' and initial_state[j] != '}'):
@@ -77,7 +79,7 @@ class ReadTextFile():
                         concat_string = concat_string + initial_state[j]; 
                     j+=1
                 i = j            
-                set_initial_states.add(concat_string)
+                list_initial_states.append(concat_string)
                 concat_string = ''
                 if(i < len(initial_state) - 1):         
                     i+=1
@@ -109,18 +111,16 @@ class ReadTextFile():
         if(transitions[0].startswith('{')):
             while(i < len(transitions) and transitions[i].endswith('}') != True):            
                 if(transitions[i] == '('):
-                    # print('ENTRA A ( : ', transitions[i])
                     aux_list.clear()       
                     start_transitions = True
                 
                 if(start_transitions):
                     j = i                    
                     while(j < len(transitions) and transitions[j] != ',' and transitions != ')'): 
-                        if(transitions [j] != '(' and transitions [j] != ')' and transitions [j] != '}'):
-                            concat_string = concat_string + transitions[j]
-                            # print('CONCAT STRING: ', concat_string)                        
+                        if(transitions [j] != '(' and transitions [j] != ')' and transitions [j] != '}' and transitions [j] != '{'):
+                            concat_string = concat_string + transitions[j]                      
                         j+=1
-                        if(j < len(transitions) and (transitions[j] == ',' or transitions[j] == '}')):
+                        if(j < len(transitions) and (transitions[j] == ',' or transitions[j] == '}') and concat_string !=''):
                             aux_list.append(concat_string)
                             concat_string = ''
                         if(j < len(transitions) and transitions[j] == ')'):
@@ -132,14 +132,30 @@ class ReadTextFile():
                     i = j                     
                 i+=1
         
+        new_list = []
+        list_index = []
+        for x in range(len(list_transitions)):
+            if(len(list_transitions[x]) > 3):
+                list_index.append(x)
+                for y in range (len(list_transitions[x])):
+                    if(y < 2):
+                        new_list.append(list_transitions[x][y])
+                    if(y >= 2):
+                        new_list.append(list_transitions[x][y])
+                        concatenate_tuples = tuple(new_list)
+                        list_transitions.append(concatenate_tuples)
+                        del new_list[-1]
+     
+        for z in list_index:
+            del list_transitions[z]  #eliminate a item of list for index      
+        
         #----- get table of transitions -----------------------------------------------
         for i in range (len(list_transitions)):
             tf[(list_transitions[i][0], list_transitions[i][1])] = list_transitions[i][2]         
 
-        
-        if(isDFA):
-            notation_dict = {'S': set_alphabet, 'Q': set_states, 'q0': initial_state, 'F': set_final_states, 'D': tf}
-        else:
-            notation_dict = {'S': set_alphabet, 'Q': set_states, 'q0': set_initial_states, 'F': set_final_states, 'D': tf}
+            if(initial_pair_keys == False):
+                notation_dict = {'S': set_alphabet, 'Q': set_states, 'q0': initial_state, 'F': set_final_states, 'D': tf, 'isDFA': initial_pair_keys}
+            else:
+                notation_dict = {'S': set_alphabet, 'Q': set_states, 'q0': list_initial_states, 'F': set_final_states, 'D': tf, 'isDFA': initial_pair_keys}
 
         return notation_dict

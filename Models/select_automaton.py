@@ -15,11 +15,22 @@ class SelectAutomaton():
     def has_symbols(self, text):
         return any(c in punctuation for c in text) 
     
-    def automaton_function(self,text):       
+    def automaton_function(self,text): 
+        initial_state = ''      
         notations = general_dict 
         alphabet = notations['S']
         states = notations['Q']
-        initial_state = notations['q0']
+        initial_q0 = notations['q0']
+        if(notations['isDFA'] != True):
+            initial_state = initial_q0
+        else:
+            if(len(initial_q0) == 1):
+                initial_state = initial_q0[0]
+            elif(len(initial_q0) == 2):
+                initial_state = initial_q0[0], initial_q0[1]
+            elif(len(initial_q0) == 3):
+                initial_state = initial_q0[0], initial_q0[1], initial_q0[2]
+
         final_states = notations['F']
         list_transition = notations['D']
         if(len(text) > 0 and self.has_symbols(text) == False):
