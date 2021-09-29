@@ -1,4 +1,3 @@
-from Models.read_text_file import ReadTextFile
 from Models.select_automaton import SelectAutomaton
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog
