@@ -154,7 +154,7 @@ color: rgb(255, 255, 255);</string>
      <string notr="true">font: 63 16pt &quot;Yu Gothic UI Semibold&quot;;</string>
     </property>
     <property name="text">
-     <string>DFA / DFN</string>
+     <string>DFA / AFN</string>
     </property>
     <property name="textFormat">
      <enum>Qt::AutoText</enum>
