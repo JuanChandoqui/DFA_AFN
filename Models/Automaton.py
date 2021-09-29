@@ -25,31 +25,3 @@ class Automaton:
         for inp in input_list:
             self.transition_to_state_with_input(inp)
         return self.in_accept_state()
-
-# states = {'q0', 'q1', 'q2', 'q3', 'q4'}
-# alphabet = {'a', 'b', 'c'}
-# example = ['q0', 'q1']
-# print(example[0])
-
-# tf = dict();
-# tf[('q0', 'a')] = 'q1'
-# tf[('q0', 'a')] = 'q3'
-# tf[('q1', 'c')] = 'q2'
-# tf[('q2', 'c')] = 'q1'
-# tf[('q3', 'b')] = 'q1'
-# tf[('q3', 'b')] = 'q4'
-# tf[('q4', 'c')] = 'q2'
-
-# if(len(example) == 1):
-#     start_state = example [0]
-# elif(len(example) == 2):
-#     start_state = example [0], example [1]
-
-# accept_states = {'q2', 'q3'}
-# print('TF: ', tf)
-
-# d = Automaton(states, alphabet, tf, start_state, accept_states)
-
-# inp_program = list('abc')
-
-# print(d.run_with_input_list(inp_program))
