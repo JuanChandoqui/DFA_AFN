@@ -147,17 +147,19 @@ class ReadTextFile():
                         concatenate_tuples = tuple(new_list)
                         list_transitions.append(concatenate_tuples)
                         del new_list[-1]
-     
+
         for z in list_index:
             del list_transitions[z]  #eliminate a item of list for index      
         
-        #----- get table of transitions -----------------------------------------------
-        for i in range (len(list_transitions)):
-            tf[(list_transitions[i][0], list_transitions[i][1])] = list_transitions[i][2]         
+        new_list_transitions = list(dict.fromkeys(list_transitions))
 
-            if(initial_pair_keys == False):
-                notation_dict = {'S': set_alphabet, 'Q': set_states, 'q0': initial_state, 'F': set_final_states, 'D': tf, 'isDFA': initial_pair_keys, 'isAFN': isAFN}
-            else:
-                notation_dict = {'S': set_alphabet, 'Q': set_states, 'q0': list_initial_states, 'F': set_final_states, 'D': tf, 'isDFA': initial_pair_keys, 'isAFN': isAFN}
+        #----- get table of transitions -----------------------------------------------
+        for i in range (len(new_list_transitions)):
+            tf[(new_list_transitions[i][0], new_list_transitions[i][1])] = new_list_transitions[i][2]      
+
+        if(initial_pair_keys == False):
+            notation_dict = {'S': set_alphabet, 'Q': set_states, 'q0': initial_state, 'F': set_final_states, 'D': tf, 'isDFA': initial_pair_keys, 'isAFN': isAFN}
+        else:
+            notation_dict = {'S': set_alphabet, 'Q': set_states, 'q0': list_initial_states, 'F': set_final_states, 'D': tf, 'isDFA': initial_pair_keys, 'isAFN': isAFN}
 
         return notation_dict
