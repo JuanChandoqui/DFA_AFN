@@ -134,8 +134,10 @@ class ReadTextFile():
         
         new_list = []
         list_index = []
+        isAFN = False
         for x in range(len(list_transitions)):
             if(len(list_transitions[x]) > 3):
+                isAFN = True
                 list_index.append(x)
                 for y in range (len(list_transitions[x])):
                     if(y < 2):
@@ -154,8 +156,8 @@ class ReadTextFile():
             tf[(list_transitions[i][0], list_transitions[i][1])] = list_transitions[i][2]         
 
             if(initial_pair_keys == False):
-                notation_dict = {'S': set_alphabet, 'Q': set_states, 'q0': initial_state, 'F': set_final_states, 'D': tf, 'isDFA': initial_pair_keys}
+                notation_dict = {'S': set_alphabet, 'Q': set_states, 'q0': initial_state, 'F': set_final_states, 'D': tf, 'isDFA': initial_pair_keys, 'isAFN': isAFN}
             else:
-                notation_dict = {'S': set_alphabet, 'Q': set_states, 'q0': list_initial_states, 'F': set_final_states, 'D': tf, 'isDFA': initial_pair_keys}
+                notation_dict = {'S': set_alphabet, 'Q': set_states, 'q0': list_initial_states, 'F': set_final_states, 'D': tf, 'isDFA': initial_pair_keys, 'isAFN': isAFN}
 
         return notation_dict

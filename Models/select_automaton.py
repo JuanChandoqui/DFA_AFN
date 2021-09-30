@@ -34,7 +34,15 @@ class SelectAutomaton():
         final_states = notations['F']
         list_transition = notations['D']
         if(len(text) > 0 and self.has_symbols(text) == False):
-            d = Automaton(states, alphabet, list_transition, initial_state, final_states)
-            return d.run_with_input_list(text)
+            if(notations['isAFN'] != True and alphabet.__contains__('ε') != True):
+                d = Automaton(states, alphabet, list_transition, initial_state, final_states)
+                return d.run_with_input_list(text)
+            elif (notations['isAFN'] == True):
+                x = Automaton(states, alphabet, list_transition, initial_state, final_states)
+                return  x.run_with_input_list(text)
+            else:
+                print('PROBABLEMENTE CONTIENE LA CADENA VACIA! (ε)')
+                print('NO SE ACEPTA LA CADENA VACIA EN UN DFA')
+                return False
         else:
             return False      
