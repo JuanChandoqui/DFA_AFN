@@ -42,6 +42,7 @@ class Window(QMainWindow):
     def isClickedButtonOK(self):
         global selected_automaton
         text = self.textField_text.text()
+
         text = text.lower()
         input_text = list(text)            
             

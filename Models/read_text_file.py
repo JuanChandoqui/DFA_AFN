@@ -38,7 +38,7 @@ class ReadTextFile():
 
         for index in value_list:
             if(index.startswith('S')):
-                alphabet = index.split('=',1)[-1].replace(',', '').replace('{', '').replace('}','')
+                alphabet = index.split('=',1)[-1].replace(',', '').replace('{', '').replace('}','').replace('epsilon', 'ϵ')
             elif (index.startswith('Q')):
                 states = index.split('=',1)[-1]
             elif (index.startswith('q0')):
@@ -46,7 +46,7 @@ class ReadTextFile():
             elif (index.startswith('F')):
                 final_states = index.split('=',1)[-1]
             elif (index.startswith('D')):
-                transitions = index.split('=',1)[-1]
+                transitions = index.split('=',1)[-1].replace('epsilon', 'ϵ')
 
         #----- get alphabet -----------------------------------
         for value in alphabet:
@@ -153,13 +153,15 @@ class ReadTextFile():
         
         new_list_transitions = list(dict.fromkeys(list_transitions))
 
+        list_dict = []
         #----- get table of transitions -----------------------------------------------
         for i in range (len(new_list_transitions)):
-            tf[(new_list_transitions[i][0], new_list_transitions[i][1])] = new_list_transitions[i][2]      
+            tf[(new_list_transitions[i][0], new_list_transitions[i][1])] = new_list_transitions[i][2] 
+            list_dict.append([(new_list_transitions[i][0], new_list_transitions[i][1]) , new_list_transitions[i][2]])
 
         if(initial_pair_keys == False):
-            notation_dict = {'S': set_alphabet, 'Q': set_states, 'q0': initial_state, 'F': set_final_states, 'D': tf, 'isDFA': initial_pair_keys, 'isAFN': isAFN}
+            notation_dict = {'S': set_alphabet, 'Q': set_states, 'q0': initial_state, 'F': set_final_states, 'D': list_dict, 'isDFA': initial_pair_keys, 'isAFN': isAFN}
         else:
-            notation_dict = {'S': set_alphabet, 'Q': set_states, 'q0': list_initial_states, 'F': set_final_states, 'D': tf, 'isDFA': initial_pair_keys, 'isAFN': isAFN}
+            notation_dict = {'S': set_alphabet, 'Q': set_states, 'q0': list_initial_states, 'F': set_final_states, 'D': list_dict, 'isDFA': initial_pair_keys, 'isAFN': isAFN}
 
         return notation_dict
